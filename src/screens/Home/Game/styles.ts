@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
   scoreDisplay: {
     position: 'absolute',
     top: 20,
-    alignSelf: 'center',
+    right: 20,
     zIndex: 999,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     paddingHorizontal: 20,
@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
     borderRadius: 15,
   },
   scoreText: {
-    fontSize: 36,
+    fontSize: 15,
     fontWeight: 'bold',
     color: '#fff',
     textAlign: 'center',
