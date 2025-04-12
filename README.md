@@ -1,6 +1,14 @@
-# Welcome to your Expo app 👋
+# Flappy Annie Game with NEAT AI
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is a Flappy Bird-style game built with React Native and Expo, featuring an AI player powered by NEAT (NeuroEvolution of Augmenting Topologies).
+
+## Features
+
+- Classic Flappy Bird gameplay
+- AI mode that uses NEAT to learn how to play the game
+- Neural networks evolve over generations for improved performance
+- Toggle between manual play and AI mode
+- View AI stats including generation number, best score, and current score
 
 ## Get started
 
@@ -13,27 +21,41 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 2. Start the app
 
    ```bash
-    npx expo start
+   npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+## How the AI Works
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+The game uses a simplified implementation of NEAT (NeuroEvolution of Augmenting Topologies), a genetic algorithm that evolves neural networks.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### Neural Network Structure
 
-## Get a fresh project
+- **Inputs**: Bird Y position, Bird velocity, Distance to next pipe, Pipe gap position
+- **Hidden Layer**: 8 neurons with sigmoid activation
+- **Output**: Jump decision (> 0.5 triggers a jump)
 
-When you're ready, run:
+### Evolution Process
 
-```bash
-npm run reset-project
-```
+1. The AI starts with a population of neural networks with random weights
+2. Each network takes a turn controlling the bird
+3. Networks earn fitness points based on distance traveled
+4. After the entire population has played, the best performers are selected
+5. Offspring are created through crossover and mutation
+6. The process repeats for multiple generations
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### Using AI Mode
+
+1. Tap the AI button in the top-right corner to toggle AI control
+2. When active, the AI will control the bird automatically
+3. View the current generation, best score, and current score
+
+## Technical Details
+
+- Built with React Native and Expo
+- Uses Matter.js for physics
+- Game state managed with React hooks
+- AI implemented in TypeScript without external ML libraries
+- Best genomes are saved to device storage for continuous improvement
 
 ## Learn more
 
