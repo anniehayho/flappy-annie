@@ -1,10 +1,16 @@
 import { useEffect } from 'react'
-import { View, Image, TouchableWithoutFeedback } from 'react-native'
+import { View, Image, Text, TouchableWithoutFeedback } from 'react-native'
 import GAME_OVER from '../../../../assets/images/game-over.png'
 
 import { styles } from './styles'
 
-const GameOver = ({ handlebackToStart }: { handlebackToStart: () => void }) => {
+interface GameOverProps {
+  handlebackToStart: () => void;
+  score: number;
+  maxScore: number;
+}
+
+const GameOver = ({ handlebackToStart, score, maxScore }: GameOverProps) => {
   useEffect(() => {
     setTimeout(() => {
       handlebackToStart()
@@ -14,6 +20,10 @@ const GameOver = ({ handlebackToStart }: { handlebackToStart: () => void }) => {
   return (
     <View style={styles.container}>
       <Image source={GAME_OVER} style={styles.logo} />
+      <View style={styles.scoreContainer}>
+        <Text style={styles.scoreText}>Score: {score}</Text>
+        <Text style={styles.scoreText}>Best Score: {maxScore}</Text>
+      </View>
     </View>
   )
 }

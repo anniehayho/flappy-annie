@@ -6,6 +6,9 @@ import { getPipeSizePosPair } from './random'
 const windowHeight = Dimensions.get('window').height
 const windowWidth = Dimensions.get('window').width
 
+// To track which pipes have been scored
+let pipesScored = [false, false];
+
 export const Physics = (entities: any, { touches, time, dispatch }: { touches: any, time: any, dispatch: any }) => {
   let engine = entities.physics.engine
 
@@ -18,9 +21,27 @@ export const Physics = (entities: any, { touches, time, dispatch }: { touches: a
       })
     })
 
+  // Track whether bird has passed a pipe
+  const birdX = entities.Bird.body.position.x;
+
   for (let index = 1; index <= 2; index++) {
+    // Get array index (0 or 1)
+    const pipeIndex = index - 1;
+    
+    // Check if bird has passed the pipe
+    const pipeX = entities[`ObstacleTop${index}`].body.position.x;
+    
+    // Bird is past the pipe center (pipe is behind the bird)
+    if (pipeX < birdX && !pipesScored[pipeIndex]) {
+      pipesScored[pipeIndex] = true;
+      dispatch({ type: 'score' });
+    }
+    
     if (entities[`ObstacleTop${index}`].body.bounds.max.x <= 0) {
       const pipeSizePos = getPipeSizePosPair(windowWidth * 0.9)
+      
+      // Reset scoring for this pipe
+      pipesScored[pipeIndex] = false;
 
       Matter.Body.setPosition(
         entities[`ObstacleTop${index}`].body,

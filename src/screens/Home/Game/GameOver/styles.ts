@@ -14,5 +14,15 @@ export const styles = StyleSheet.create({
     marginTop: 32,
     width: 120,
     height: 74
+  },
+  scoreContainer: {
+    marginTop: 30,
+    alignItems: 'center'
+  },
+  scoreText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#fff',
+    marginVertical: 5
   }
 })
